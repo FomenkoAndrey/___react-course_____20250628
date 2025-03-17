@@ -1,18 +1,16 @@
 import { RiDeleteBin2Line, RiTodoFill } from 'react-icons/ri'
-import { TodoInterface } from '../types/Todo.interface'
 import { FaCheck } from 'react-icons/fa6'
+import { useContext } from 'react'
+import { Context } from '../context/Context'
+import { TodoInterface } from '../types/Todo.interface'
 
 interface TodoProps {
   todo: TodoInterface
-  onDeleteTodo: (id: number) => void
-  onToggleTodo: (id: number) => void
 }
 
-const Todo = ({
-  todo: { id, title, completed },
-  onDeleteTodo,
-  onToggleTodo
-}: TodoProps) => {
+const Todo = ({ todo: { id, title, completed } }: TodoProps) => {
+  const { deleteTodo, toggleTodo } = useContext(Context)
+
   return (
     <div className={`todo ${completed ? 'todo--completed' : ''}`}>
       <div className="todo__id">{id}</div>
@@ -21,9 +19,9 @@ const Todo = ({
       <div className="todo__completed">{completed.toString()}</div>
       <RiDeleteBin2Line
         className="todo__delete-btn"
-        onClick={() => onDeleteTodo(id)}
+        onClick={() => deleteTodo(id)}
       />
-      <FaCheck className="todo__check-btn" onClick={() => onToggleTodo(id)} />
+      <FaCheck className="todo__check-btn" onClick={() => toggleTodo(id)} />
     </div>
   )
 }

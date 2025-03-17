@@ -1,23 +1,23 @@
-import { useState } from 'react'
-import { TodoInterface } from '../types/Todo.interface'
-import Button from './Button'
+import { useContext, useState } from 'react'
 import { v4 as uuidv4 } from 'uuid'
+import { Context } from '../context/Context'
+import Button from './Button'
 
-interface FormProps {
-  onAddTodo: (todo: TodoInterface) => void
-}
-
-const Form = ({ onAddTodo }: FormProps) => {
+const Form = () => {
   const [title, setTitle] = useState('')
+  const { addTodo } = useContext(Context)
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    onAddTodo({
+    setTitle('')
+    const trimmedTitle = title.trim()
+    if (!trimmedTitle) return
+
+    addTodo({
       id: uuidv4(),
-      title,
+      title: trimmedTitle,
       completed: false
     })
-    setTitle('')
   }
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {

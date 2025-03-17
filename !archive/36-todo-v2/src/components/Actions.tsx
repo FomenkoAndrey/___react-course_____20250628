@@ -1,17 +1,13 @@
+import { useContext } from 'react'
+import { Context } from '../context/Context'
 import { RiCheckboxCircleLine, RiDeleteBin5Line } from 'react-icons/ri'
 import Button from './Button'
 
-interface ActionsProps {
-  deleteAllTodos: () => void
-  clearCompletedTodos: () => void
-  completedTodosExist: boolean
-}
+const Actions = () => {
+  const { deleteAllTodos, clearCompletedTodos, completedTodosCount } =
+    useContext(Context)
 
-const Actions = ({
-  deleteAllTodos,
-  clearCompletedTodos,
-  completedTodosExist
-}: ActionsProps) => {
+  const completedTodosExist = completedTodosCount > 0
   return (
     <div className="todos__actions">
       <Button title="Delete All Todos" onClick={deleteAllTodos} type="button">
