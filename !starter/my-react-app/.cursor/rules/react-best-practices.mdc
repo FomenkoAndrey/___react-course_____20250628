@@ -1,6 +1,7 @@
 ---
 description: Best practices for React component development and state management
-globs: **/*.{ts,tsx,js,jsx}
+globs: **/*.ts,**/*.tsx,**/*.js,**/*.jsx
+alwaysApply: false
 ---
 
 - Use functional components with hooks (e.g., useState, useEffect) instead of class components.
