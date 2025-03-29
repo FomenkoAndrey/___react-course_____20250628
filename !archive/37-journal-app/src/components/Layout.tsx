@@ -1,13 +1,14 @@
 import { Outlet } from 'react-router'
-import Menu from './Menu'
 import Footer from './Footer'
+import Header from './common/Header'
+
 const Layout = () => {
   return (
-    <>
-      <Menu />
+    <div className="container vertical-flex-container">
+      <Header />
       <Outlet />
       <Footer />
-    </>
+    </div>
   )
 }
 

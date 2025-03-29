@@ -1,5 +1,5 @@
 import { NavLink } from 'react-router'
-import { routes } from '../config/router.config'
+import { routes } from '../../config/router.config'
 
 const Menu = () => {
   return (

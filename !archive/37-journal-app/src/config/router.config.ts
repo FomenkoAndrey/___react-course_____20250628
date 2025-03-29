@@ -17,5 +17,5 @@ export const routes: Route[] = [
   { path: '/about', label: 'About', Component: About },
   { path: '/contacts', label: 'Contacts', Component: Contacts },
   { path: '/articles', label: 'Articles', Component: Articles },
-  { path: '/articles/:slug', label: 'Article', Component: SingleArticle }
+  { path: '/articles/:slug/:id', label: 'Article', Component: SingleArticle }
 ]
