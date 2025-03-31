@@ -1,12 +1,6 @@
-/**
- * Генерує підпис сортування для заголовка
- * @param sortQuery Запит сортування
- * @param sortField Поле сортування
- * @returns Рядок з інформацією про сортування
- */
 export const generateSortTitle = (
-  sortQuery: string | null | undefined,
-  sortField: string | null | undefined
+    sortQuery: string | null | undefined,
+    sortField: string | null | undefined
 ): string => {
   if (!sortQuery || !sortField) return ''
 
