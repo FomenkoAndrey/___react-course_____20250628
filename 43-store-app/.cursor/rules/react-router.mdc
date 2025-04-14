@@ -1,0 +1,15 @@
+---
+description: React Router 7
+globs: **/*.ts,**/*.tsx,**/*.js,**/*.jsx
+alwaysApply: false
+---
+
+- For React Router 7+, import routing components (BrowserRouter, Route, Routes, Link, etc.) from 'react-router' instead of 'react-router-dom'
+  ```tsx
+  // Correct for v7+
+  import { BrowserRouter, Route, Routes } from 'react-router';
+  
+  // Avoid (v6 and earlier style)
+  import { BrowserRouter, Route, Routes } from 'react-router-dom';
+  ```
+- Continue using 'react-router-dom' for DOM-specific components if they're not available in 'react-router'

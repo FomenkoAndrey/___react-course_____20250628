@@ -2,8 +2,60 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  list-style-type: none;
 }
 
 body {
-  font-family: 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  font-family: 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell',
+    'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  color: black;
+  overflow-y: scroll;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.container {
+  width: min(100% - 40px, 1340px);
+  margin-inline: auto;
+}
+
+.error {
+  text-align: center;
+  margin: 40px 0;
+}
+
+.loading {
+  font-size: 2rem;
+  text-align: center;
+}
+
+.navbar {
+  padding: 20px 0;
+  background-color: #f8f8f8;
+  margin-bottom: 40px;
+}
+
+.navbar__list {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.navbar__link {
+  display: block;
+  padding: 10px 20px;
+  border-radius: 4px;
+}
+
+.navbar__link.active {
+  background-color: tomato;
+  color: white;
 }
