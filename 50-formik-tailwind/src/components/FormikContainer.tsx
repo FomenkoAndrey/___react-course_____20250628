@@ -1,19 +1,39 @@
 import { object, string } from 'yup'
-import FormikControl from './FormikControl'
+import FormikControl from './FormikComponents/FormikControl'
 import { Formik, Form } from 'formik'
+import Button from './FormikComponents/Button'
+
+interface FormValuesInterface {
+  email: string
+  description: string
+  selectOption: string
+  // radioOption: string
+  // checkboxOption: string[]
+  date: Date | null
+}
+
+const initialValues = {
+  email: '',
+  description: '',
+  selectOption: '',
+  date: null
+}
+
+const validationSchema = object({
+  email: string().email('Invalid email address').required('Required'),
+  description: string().required('Required'),
+  selectOption: string().required('Please select an option')
+})
+
+const dropdownOptions = [
+  { key: 'Select an option', value: '' },
+  { key: 'Option 1', value: 'option1' },
+  { key: 'Option 2', value: 'option2' },
+  { key: 'Option 3', value: 'option3' }
+]
 
 const FormikContainer = () => {
-  const initialValues = {
-    email: '',
-    description: ''
-  }
-
-  const validationSchema = object({
-    email: string().email('Invalid email address').required('Required'),
-    description: string().required('Required')
-  })
-
-  const onSubmit = (values: any) => {
+  const onSubmit = (values: FormValuesInterface) => {
     console.log(values)
   }
 
@@ -37,20 +57,27 @@ const FormikContainer = () => {
             placeholder="Enter your email address"
           />
           <FormikControl
+            control="select"
+            label="Select a Topic"
+            name="selectOption"
+            id="select-topic"
+            options={dropdownOptions}
+          />
+          <FormikControl
             control="textarea"
             label="Description"
             name="description"
             id="description-textarea"
             placeholder="Tell us about your request..."
           />
-          <div className="pt-2">
-            <button
-              type="submit"
-              className="w-full bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded-lg transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 text-lg"
-            >
-              Submit
-            </button>
-          </div>
+          <FormikControl
+            control="date"
+            label="Pick a date"
+            name="date"
+            placeholder="Select a date"
+            id="date-input"
+          />
+          <Button text="Submit" type="submit" className="w-full" />
         </Form>
       </Formik>
     </div>
