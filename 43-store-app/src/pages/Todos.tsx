@@ -7,7 +7,9 @@ const Todos = () => {
     data: todos,
     error,
     isLoading
-  } = useFetch<TodoInterface>('https://jsonplaceholder.typicode.com/todos', 20)
+  } = useFetch<TodoInterface>(
+    'https://jsonplaceholder.typicode.com/todos?_limit=20'
+  )
 
   return (
     <div>

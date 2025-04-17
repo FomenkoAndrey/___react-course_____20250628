@@ -1,6 +1,7 @@
+import axios from 'axios'
 import { useEffect, useState } from 'react'
 
-export const useFetch = <T>(url: string, limit?: number) => {
+export const useFetch = <T>(url: string, reload?: string) => {
   const [data, setData] = useState<T[]>([])
   const [error, setError] = useState<string | null>(null)
   const [isLoading, setIsLoading] = useState<boolean>(false)
@@ -10,14 +11,13 @@ export const useFetch = <T>(url: string, limit?: number) => {
       setIsLoading(true)
       try {
         await new Promise((resolve) => setTimeout(resolve, 1000))
-        const res = await fetch(limit ? `${url}?_limit=${limit}` : url)
+        const response = await axios.get(url)
 
-        if (!res.ok) {
+        if (response.status !== 200) {
           throw new Error(`Failed to fetch data from ${url}`)
         }
 
-        const result = await res.json()
-        setData(result)
+        setData(response.data)
       } catch (error) {
         setError(error as string)
       } finally {
@@ -26,7 +26,7 @@ export const useFetch = <T>(url: string, limit?: number) => {
     }
 
     fetchData()
-  }, [url, limit])
+  }, [url, reload])
 
   return { data, error, isLoading }
 }

@@ -7,7 +7,9 @@ const Posts = () => {
     data: posts,
     error,
     isLoading
-  } = useFetch<PostInterface>('https://jsonplaceholder.typicode.com/posts', 20)
+  } = useFetch<PostInterface>(
+    'https://jsonplaceholder.typicode.com/posts?_limit=20'
+  )
 
   return (
     <div>
