@@ -1,0 +1,16 @@
+.container {
+  width: 50%;
+  margin: 0 auto;
+  border: 1px solid #000;
+  padding: 1em;
+  border-radius: 0.5em;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
+}
+
+.margin {
+  margin: 1em;
+}
+
+.textDecoration {
+  text-decoration: underline;
+}
