@@ -2,6 +2,8 @@ import type { ReactElement } from 'react'
 import Home from '../components/pages/Home'
 import Posts from '../components/pages/Posts'
 import Users from '../components/pages/Users'
+import Todos from '../components/pages/Todos'
+import Products from '../components/pages/Products'
 
 export interface RouteConfig {
   id: string
@@ -20,6 +22,13 @@ export const routesConfig: RouteConfig[] = [
     showInNavigation: true
   },
   {
+    id: 'products',
+    path: '/products',
+    element: <Products />,
+    label: 'Продукти',
+    showInNavigation: true
+  },
+  {
     id: 'posts',
     path: '/posts',
     element: <Posts />,
@@ -31,6 +40,13 @@ export const routesConfig: RouteConfig[] = [
     path: '/users',
     element: <Users />,
     label: 'Користувачі',
+    showInNavigation: true
+  },
+  {
+    id: 'todos',
+    path: '/todos',
+    element: <Todos />,
+    label: 'Завдання',
     showInNavigation: true
   }
 ]

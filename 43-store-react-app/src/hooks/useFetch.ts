@@ -7,29 +7,38 @@ export interface UseFetchResult<T> {
   error: string | null
 }
 
-const useFetch = <T>(url: string): UseFetchResult<T> => {
+const useFetch = <T>(url: string, limit?: number, reload?: string): UseFetchResult<T> => {
   const [data, setData] = useState<T[]>([])
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
+    const cancelTokenSource = axios.CancelToken.source()
+
     const fetchData = async () => {
+      setIsLoading(true)
+      setError(null)
+
+      console.log(url)
       try {
-        setIsLoading(true)
-        setError(null)
-
-        const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms))
-        await delay(1000)
-
-        const response = await axios.get(url)
+        const response = await axios.get<T[]>(url, {
+          params: {
+            _limit: limit
+          },
+          cancelToken: cancelTokenSource.token
+        })
 
         if (response.status !== 200) {
           throw new Error(`Error: Request failed with status code ${response.status}`)
         }
 
-        setData(response.data as T[])
+        setData(response.data)
       } catch (error) {
-        setError(error as string)
+        if (axios.isCancel(error)) {
+          console.log('Request cancelled:', error.message)
+        } else {
+          setError(`Error fetching data: ${(error as Error).message}`)
+        }
       } finally {
         setIsLoading(false)
       }
@@ -38,7 +47,11 @@ const useFetch = <T>(url: string): UseFetchResult<T> => {
     if (url) {
       fetchData()
     }
-  }, [url])
+
+    return () => {
+      cancelTokenSource.cancel('Operation cancelled due to new request.')
+    }
+  }, [url, limit, reload])
 
   return { data, isLoading, error }
 }
