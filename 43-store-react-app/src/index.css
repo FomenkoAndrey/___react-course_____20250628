@@ -105,6 +105,57 @@ h1 {
   color: white;
 }
 
+/* products-empty */
+.products-empty {
+  text-align: center;
+  font-size: 2rem;
+}
+
+/* products-filter */
+.products-filter {
+  display: grid;
+  grid-template-columns: 1fr 200px 150px 40px;
+  gap: 20px;
+  background: linear-gradient(135deg, #3498db, #9b59b6);
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+  justify-content: center;
+}
+
+.products-filter button,
+.products-filter input,
+.products-filter select {
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  font-size: 1rem;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.products-filter button {
+  align-self: flex-end;
+}
+
+.products-filter button > * {
+  scale: 1.5;
+  translate: 0 2px;
+}
+
+.products-filter button:hover,
+.products-filter button:focus,
+.products-filter input:hover,
+.products-filter input:focus,
+.products-filter select:hover,
+.products-filter select:focus {
+  transform: scale(1.05);
+}
+
+.products-filter input::placeholder {
+  color: #888888;
+}
+
 /* products-list */
 .products-list {
   display: grid;

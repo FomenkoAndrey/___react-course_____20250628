@@ -1,106 +1,85 @@
 import { useState, type FormEvent } from 'react'
 import type { ProductInterface } from '../../types/Product.interface'
 import { PRODUCT_CATEGORIES } from '../../data/mockData'
+import InputField from './InputField'
+import SelectField from './SelectField'
 
 interface ProductFormProps {
-  onSubmit: (product: ProductInterface) => void
+  onSubmit: (product: Partial<ProductInterface>) => void
+  product: Partial<ProductInterface>
 }
 
-const ProductForm = ({ onSubmit }: ProductFormProps) => {
-  const [id, setId] = useState(0)
-  const [name, setName] = useState('')
-  const [description, setDescription] = useState('')
-  const [price, setPrice] = useState('')
-  const [category, setCategory] = useState('')
-  const [image, setImage] = useState('https://picsum.photos/640/480?random=graphics')
+const ProductForm = ({ onSubmit, product }: ProductFormProps) => {
+  const [name, setName] = useState(product.name as string)
+  const [description, setDescription] = useState(product.description as string)
+  const [price, setPrice] = useState(product.price as number)
+  const [category, setCategory] = useState(product.category as string)
+  const [image, setImage] = useState(product.image as string)
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    onSubmit({ id, name, description, price, category, image })
-    setId(0)
+
+    const returnProduct: Partial<ProductInterface> = { name, description, price, category, image }
+
+    if (product.id) {
+      returnProduct.id = product.id
+    }
+
+    onSubmit(returnProduct)
     setName('')
     setDescription('')
-    setPrice('')
+    setPrice(0)
     setCategory('')
     setImage('')
   }
 
   return (
     <form onSubmit={handleSubmit}>
-      <div className="form-group">
-        <label className="form-label" htmlFor="name">
-          Name:
-        </label>
-        <input
-          className="form-control"
-          id="name"
-          type="text"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          placeholder="Product name..."
-          required
-        />
-      </div>
-      <div className="form-group">
-        <label className="form-label" htmlFor="description">
-          Description:
-        </label>
-        <textarea
-          className="form-control"
-          id="description"
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-          placeholder="Product description..."
-          required
-        />
-      </div>
-      <div className="form-group">
-        <label className="form-label" htmlFor="price">
-          Price:
-        </label>
-        <input
-          className="form-control"
-          id="price"
-          type="number"
-          value={price}
-          onChange={(e) => setPrice(e.target.value)}
-          placeholder="Product price..."
-          required
-        />
-      </div>
-      <div className="form-group">
-        <label className="form-label" htmlFor="image">
-          Image:
-        </label>
-        <input
-          className="form-control"
-          id="image"
-          type="url"
-          value={image}
-          onChange={(e) => setImage(e.target.value)}
-          placeholder="Product image..."
-          required
-        />
-      </div>
-      <div className="form-group">
-        <label className="form-label" htmlFor="category">
-          Category:
-        </label>
-        <select
-          className="form-control"
-          id="category"
-          value={category}
-          onChange={(e) => setCategory(e.target.value)}
-          required
-        >
-          <option value="">Please select a category...</option>
-          {PRODUCT_CATEGORIES.map((category) => (
-            <option key={category} value={category}>
-              {category}
-            </option>
-          ))}
-        </select>
-      </div>
+      <InputField
+        id="name"
+        value={name}
+        label="Name"
+        placeholder="Product name..."
+        required
+        onChangeInput={(e) => setName(e.target.value)}
+      />
+
+      <InputField
+        id="description"
+        value={description}
+        label="Description"
+        placeholder="Product description..."
+        textarea
+        onChangeTextArea={(e) => setDescription(e.target.value)}
+      />
+
+      <InputField
+        id="price"
+        value={price.toString()}
+        label="Price"
+        placeholder="Product price..."
+        required
+        onChangeInput={(e) => setPrice(+e.target.value)}
+      />
+
+      <InputField
+        id="image"
+        value={image}
+        label="Image"
+        placeholder="Product image..."
+        required
+        onChangeInput={(e) => setImage(e.target.value)}
+      />
+
+      <SelectField
+        id="category"
+        value={category}
+        label="Category"
+        required
+        options={PRODUCT_CATEGORIES.map((category) => ({ value: category, text: category }))}
+        onChangeSelect={(e) => setCategory(e.target.value)}
+      />
+
       <div className="form-group">
         <button className="form-button" type="submit">
           Submit
