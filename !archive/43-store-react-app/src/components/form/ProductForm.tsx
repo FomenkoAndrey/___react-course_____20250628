@@ -76,7 +76,7 @@ const ProductForm = ({ onSubmit, product }: ProductFormProps) => {
         value={category}
         label="Category"
         required
-        options={PRODUCT_CATEGORIES.map((category) => ({ value: category, text: category }))}
+        options={PRODUCT_CATEGORIES}
         onChangeSelect={(e) => setCategory(e.target.value)}
       />
 
