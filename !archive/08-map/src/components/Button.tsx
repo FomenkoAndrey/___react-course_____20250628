@@ -1,12 +1,10 @@
-import type { ReactNode } from 'react'
-
 interface ButtonProps {
+  caption: string
   onClick: () => void
-  children: ReactNode
 }
 
-const Button = ({ onClick, children }: ButtonProps) => {
-  return <button onClick={onClick}>{children}</button>
+const Button = ({ caption, onClick }: ButtonProps) => {
+  return <button onClick={onClick}>{caption}</button>
 }
 
 export default Button

@@ -3,7 +3,7 @@ interface CounterProps {
 }
 
 const Counter = ({ count }: CounterProps) => {
-  return <h1>Count: {count}</h1>
+  return <h1>Counter: {count}</h1>
 }
 
 export default Counter

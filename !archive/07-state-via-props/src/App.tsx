@@ -1,23 +1,20 @@
-import { useState } from 'react'
 import Counter from './components/Counter'
 import Button from './components/Button'
+import { useState } from 'react'
 
 const App = () => {
   const [count, setCount] = useState(0)
 
-  const handleIncrement = () => {
-    setCount(count + 1)
-  }
-
-  const handleDecrement = () => {
-    setCount(count - 1)
-  }
+  const incrementCount = () => setCount(count + 1)
+  const decrementCount = () => setCount(count - 1)
+  const resetCount = () => setCount(0)
 
   return (
     <div>
       <Counter count={count} />
-      <Button onClick={handleIncrement}>Increment</Button>
-      <Button onClick={handleDecrement}>Decrement</Button>
+      <Button onClick={incrementCount} caption="Increment" />
+      <Button onClick={decrementCount} caption="Decrement" />
+      <Button onClick={resetCount} caption="Reset" />
     </div>
   )
 }

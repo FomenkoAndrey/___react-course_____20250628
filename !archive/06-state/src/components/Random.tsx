@@ -7,7 +7,7 @@ interface RandomProps {
 }
 
 const Random = ({ min, max }: RandomProps) => {
-  const [num, setNum] = useState(0)
+  const [num, setNum] = useState(randomizer(min, max))
 
   const changeNum = () => {
     setNum(randomizer(min, max))
@@ -16,7 +16,7 @@ const Random = ({ min, max }: RandomProps) => {
   return (
     <div>
       <h1>{num}</h1>
-      <button onClick={changeNum}>Change Number</button>
+      <button onClick={changeNum}>Generate</button>
     </div>
   )
 }

@@ -1,13 +1,15 @@
-import User from './User'
 import { MOCK_USERS } from '../data/mock-users'
 import type { UserInterface } from '../types/User.interface'
+import User from './User'
+
+const users: UserInterface[] = MOCK_USERS
 
 const Users = () => {
   return (
     <div>
-      {MOCK_USERS.map((user: UserInterface) => (
-        <User key={user.id} {...user} />
-      ))}
+      {users.map((user: UserInterface) => {
+        return <User key={user.id} {...user} />
+      })}
     </div>
   )
 }

@@ -1,16 +1,18 @@
-import type { UserInterface } from '../types/User.interface'
+interface UserProps {
+  id: number
+  name: string
+  email: string
+  username: string
+}
 
-const User = ({ id, name, username, email, phone, website }: UserInterface) => {
+const User = ({ id, name, email, username }: UserProps) => {
   return (
-    <div>
-      <h1>
-        {id} - {name}
-      </h1>
-      <p>{username}</p>
+    <div style={{ borderBottom: '1px solid black', padding: '10px', margin: '10px' }}>
+      <h2>
+        {id}. {name}
+      </h2>
       <p>{email}</p>
-      <p>{phone}</p>
-      <p>{website}</p>
-      <hr />
+      <p>{username}</p>
     </div>
   )
 }
